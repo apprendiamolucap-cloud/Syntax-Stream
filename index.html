@@ -1,368 +1,262 @@
 <!DOCTYPE html>
-<html lang="it" class="dark">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNTAX STREAM - Media & Cinema</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        syntax: {
-                            pink: '#d87093',
-                            pinkHover: '#c45a7d',
-                            pinkLight: '#fce4ec',
-                            bg: '#0a0a0c',
-                            card: '#121216',
-                            border: '#22222a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>SYNTAX SANTOS - Web Movies</title>
     <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #d87093;
+            --accent-hover: #c55b7f;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0c;
-            color: #f1f5f9;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        /* Custom scrollbar matching logo theme */
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0c;
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #22222a;
-            border-radius: 4px;
+
+        .logo-icon {
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #d87093;
+
+        .brand-text h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .drive-banner {
+            background-color: rgba(216, 112, 147, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drive-banner a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .drive-banner a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .movie-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .movie-thumbnail {
+            width: 100%;
+            height: 180px;
+            background-color: #282828;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .movie-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .movie-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .movie-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.6rem 0.8rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-[#d87093] selection:text-white">
+<body>
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-[#0a0a0c]/90 backdrop-blur-md border-b border-[#22222a]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
-            <!-- Logo Syntax Santos exact match -->
-            <div class="flex items-center space-x-3">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#d87093] to-[#a84465] flex items-center justify-center shadow-lg shadow-[#d87093]/20 text-white font-extrabold text-xl tracking-tighter">
-                    &lt;S&gt;
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold tracking-wider text-white uppercase leading-none">
-                        SYNTAX <span class="text-[#d87093]">STREAM</span>
-                    </h1>
-                    <p class="text-[10px] text-slate-400 tracking-[0.2em] uppercase font-semibold mt-1">Web Development &amp; Media</p>
-                </div>
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">&lt;S&gt;</div>
+            <div class="brand-text">
+                <h1>Syntax Santos</h1>
+                <p>Web Development</p>
             </div>
+        </div>
 
-            <!-- Header Quick Actions -->
-            <div class="flex items-center space-x-4">
-                <a href="#add-movie" class="px-4 py-2 rounded-xl border border-[#d87093]/30 bg-[#d87093]/10 hover:bg-[#d87093] text-[#d87093] hover:text-white font-semibold text-xs transition duration-200 flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Aggiungi Film</span>
-                </a>
-            </div>
+        <div class="drive-banner">
+            📁 <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank">Apri Cartella Drive Completa</a>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+    <main>
+        <h2 class="section-title">Film Disponibili</h2>
 
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden rounded-3xl bg-[#121216] border border-[#22222a] p-8 md:p-12 shadow-2xl">
-            <div class="absolute -right-20 -top-20 w-80 h-80 bg-[#d87093]/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="relative z-10 max-w-2xl space-y-4">
-                <span class="inline-block text-[#d87093] text-xs font-bold uppercase tracking-widest bg-[#d87093]/10 px-3 py-1 rounded-full border border-[#d87093]/20">
-                    Compatibile con iOS, iPhone, Mac &amp; PC
-                </span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
-                    I tuoi film, pronti per lo <span class="text-[#d87093]">Streaming</span> &amp; <span class="text-[#d87093]">Download</span>
-                </h2>
-                <p class="text-slate-400 text-sm md:text-base leading-relaxed">
-                    Guarda i film direttamente dal browser del tuo iPhone o computer, oppure scaricali sul tuo dispositivo in un click.
-                </p>
-            </div>
-        </section>
-
-        <!-- Video Player Modal / Active Video Container -->
-        <section id="playerContainer" class="hidden bg-[#121216] border border-[#d87093]/40 rounded-3xl p-4 md:p-6 shadow-2xl space-y-4">
-            <div class="flex items-center justify-between border-b border-[#22222a] pb-3">
-                <h3 id="playerTitle" class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-circle-play text-[#d87093]"></i> Riproduzione Video
-                </h3>
-                <button onclick="closePlayer()" class="text-slate-400 hover:text-white p-2 text-sm rounded-lg hover:bg-slate-800 transition">
-                    <i class="fa-solid fa-xmark text-lg"></i> Chiudi Player
-                </button>
-            </div>
-            <!-- Standard HTML5 Video Player works on iOS Safari -->
-            <div class="aspect-video w-full bg-black rounded-2xl overflow-hidden">
-                <video id="mainVideoPlayer" controls playsinline class="w-full h-full object-contain">
-                    <source id="videoSource" src="" type="video/mp4">
-                    Il tuo browser non supporta la riproduzione video.
-                </video>
-            </div>
-        </section>
-
-        <!-- Movies Catalog -->
-        <section class="space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h3 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-                        <i class="fa-solid fa-film text-[#d87093]"></i> Catalogo Film
-                    </h3>
-                    <p class="text-xs text-slate-400">Clicca su "Guarda Ora" per lo streaming o "Scarica" per salvarlo su iPhone/PC.</p>
-                </div>
-                <!-- Search Bar -->
-                <div class="relative w-full sm:w-72">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
-                    <input type="text" id="searchInput" placeholder="Cerca un film..." class="w-full bg-[#121216] border border-[#22222a] rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#d87093] transition">
+        <div class="movies-grid">
+            <!-- SCHEDA FILM 1 -->
+            <div class="movie-card">
+                <div class="movie-thumbnail">🎬</div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Film 1 (Google Drive)</h3>
+                    <p class="movie-meta">MP4 • HD</p>
+                    <div class="actions">
+                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-primary">Guarda Ora</a>
+                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-secondary">Scarica</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Grid di Film -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="movieGrid">
-
-                <!-- Film 1 -->
-                <div class="movie-card bg-[#121216] border border-[#22222a] hover:border-[#d87093]/40 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    <div class="relative h-48 bg-slate-900 flex items-center justify-center group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-transparent z-10"></div>
-                        <i class="fa-solid fa-clapperboard text-6xl text-slate-800 group-hover:text-[#d87093]/40 transition duration-300"></i>
-                        <span class="absolute top-3 right-3 z-20 bg-[#0a0a0c]/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-[#d87093] border border-[#22222a]">Full HD</span>
-                        <span class="absolute bottom-3 left-3 z-20 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-xs text-slate-300"><i class="fa-regular fa-clock mr-1"></i> 1h 40m</span>
-                    </div>
-                    <div class="p-5 space-y-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-white text-base movie-title">Big Buck Bunny</h4>
-                            <p class="text-xs text-slate-400 mt-1">Film d'animazione open source in alta definizione.</p>
-                        </div>
-                        <div class="space-y-3 pt-3 border-t border-[#22222a]">
-                            <div class="flex items-center justify-between text-xs text-slate-400">
-                                <span>Dimensione: <strong class="text-slate-200">1.2 GB</strong></span>
-                                <span>Formato: <strong class="text-slate-200">MP4</strong></span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button onclick="playVideo('Big Buck Bunny', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4')" class="bg-[#d87093]/15 hover:bg-[#d87093] text-[#d87093] hover:text-white font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-[#d87093]/30">
-                                    <i class="fa-solid fa-play"></i> Guarda Ora
-                                </button>
-                                <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" download="BigBuckBunny.mp4" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-700">
-                                    <i class="fa-solid fa-download text-[#d87093]"></i> Scarica
-                                </a>
-                            </div>
-                        </div>
+            <!-- SCHEDA FILM 2 (Per aggiungere altri film in futuro) -->
+            <div class="movie-card">
+                <div class="movie-thumbnail">🎬</div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Film 2</h3>
+                    <p class="movie-meta">MP4 • HD</p>
+                    <div class="actions">
+                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-primary">Guarda Ora</a>
+                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-secondary">Scarica</a>
                     </div>
                 </div>
-
-                <!-- Film 2 -->
-                <div class="movie-card bg-[#121216] border border-[#22222a] hover:border-[#d87093]/40 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    <div class="relative h-48 bg-slate-900 flex items-center justify-center group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-transparent z-10"></div>
-                        <i class="fa-solid fa-film text-6xl text-slate-800 group-hover:text-[#d87093]/40 transition duration-300"></i>
-                        <span class="absolute top-3 right-3 z-20 bg-[#0a0a0c]/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-[#d87093] border border-[#22222a]">720p HD</span>
-                        <span class="absolute bottom-3 left-3 z-20 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-xs text-slate-300"><i class="fa-regular fa-clock mr-1"></i> 0h 28m</span>
-                    </div>
-                    <div class="p-5 space-y-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-white text-base movie-title">Elephants Dream</h4>
-                            <p class="text-xs text-slate-400 mt-1">Cortometraggio fantascientifico in computer grafica 3D.</p>
-                        </div>
-                        <div class="space-y-3 pt-3 border-t border-[#22222a]">
-                            <div class="flex items-center justify-between text-xs text-slate-400">
-                                <span>Dimensione: <strong class="text-slate-200">650 MB</strong></span>
-                                <span>Formato: <strong class="text-slate-200">MP4</strong></span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button onclick="playVideo('Elephants Dream', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4')" class="bg-[#d87093]/15 hover:bg-[#d87093] text-[#d87093] hover:text-white font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-[#d87093]/30">
-                                    <i class="fa-solid fa-play"></i> Guarda Ora
-                                </button>
-                                <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" download="ElephantsDream.mp4" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-700">
-                                    <i class="fa-solid fa-download text-[#d87093]"></i> Scarica
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Film 3 -->
-                <div class="movie-card bg-[#121216] border border-[#22222a] hover:border-[#d87093]/40 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between">
-                    <div class="relative h-48 bg-slate-900 flex items-center justify-center group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-transparent z-10"></div>
-                        <i class="fa-solid fa-video text-6xl text-slate-800 group-hover:text-[#d87093]/40 transition duration-300"></i>
-                        <span class="absolute top-3 right-3 z-20 bg-[#0a0a0c]/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-[#d87093] border border-[#22222a]">4K UHD</span>
-                        <span class="absolute bottom-3 left-3 z-20 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-xs text-slate-300"><i class="fa-regular fa-clock mr-1"></i> 2h 10m</span>
-                    </div>
-                    <div class="p-5 space-y-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-white text-base movie-title">Tears of Steel</h4>
-                            <p class="text-[#a1a1aa] text-xs mt-1">Avventura sci-fi ambientata in un futuro distopico.</p>
-                        </div>
-                        <div class="space-y-3 pt-3 border-t border-[#22222a]">
-                            <div class="flex items-center justify-between text-xs text-slate-400">
-                                <span>Dimensione: <strong class="text-slate-200">2.1 GB</strong></span>
-                                <span>Formato: <strong class="text-slate-200">MP4</strong></span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button onclick="playVideo('Tears of Steel', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4')" class="bg-[#d87093]/15 hover:bg-[#d87093] text-[#d87093] hover:text-white font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-[#d87093]/30">
-                                    <i class="fa-solid fa-play"></i> Guarda Ora
-                                </button>
-                                <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" download="TearsOfSteel.mp4" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-700">
-                                    <i class="fa-solid fa-download text-[#d87093]"></i> Scarica
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
-
-        <!-- Form per aggiungere film -->
-        <section id="add-movie" class="bg-[#121216] border border-[#22222a] rounded-3xl p-6 md:p-8 space-y-6">
-            <div class="border-b border-[#22222a] pb-4">
-                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-plus-circle text-[#d87093]"></i> Inserisci un Nuovo Film
-                </h3>
-                <p class="text-xs text-slate-400">Aggiungi il link del file video per renderlo subito visibile sul sito.</p>
-            </div>
-
-            <form id="addMovieForm" onsubmit="handleAddMovie(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Titolo del Film</label>
-                    <input type="text" id="movieTitleInput" required placeholder="Es. Inception" class="w-full bg-[#0a0a0c] border border-[#22222a] rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#d87093]">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Durata</label>
-                    <input type="text" id="movieDurationInput" required placeholder="Es. 2h 28m" class="w-full bg-[#0a0a0c] border border-[#22222a] rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#d87093]">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Dimensione File</label>
-                    <input type="text" id="movieSizeInput" required placeholder="Es. 1.8 GB" class="w-full bg-[#0a0a0c] border border-[#22222a] rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#d87093]">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1">Link Diretto al Video (.mp4)</label>
-                    <input type="url" id="movieUrlInput" required placeholder="https://esempio.com/video.mp4" class="w-full bg-[#0a0a0c] border border-[#22222a] rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#d87093]">
-                </div>
-                <div class="md:col-span-2 flex justify-end">
-                    <button type="submit" class="bg-[#d87093] hover:bg-[#c45a7d] text-white font-semibold px-6 py-3 rounded-xl text-xs transition shadow-lg shadow-[#d87093]/20 flex items-center gap-2">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Aggiungi al Catalogo
-                    </button>
-                </div>
-            </form>
-        </section>
-
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-[#0a0a0c] border-t border-[#22222a] mt-20 py-8 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center space-x-2">
-                <div class="w-6 h-6 rounded bg-[#d87093] flex items-center justify-center text-white font-bold text-xs">&lt;S&gt;</div>
-                <span class="font-bold text-slate-300">SYNTAX STREAM</span> &mdash; Syntax Santos Web Development
-            </div>
-            <p>&copy; 2026 Syntax Santos. Piattaforma multimediale per tutti i dispositivi.</p>
-        </div>
+    <footer>
+        <p>&copy; 2026 SYNTAX SANTOS WEB DEVELOPMENT. All rights reserved.</p>
     </footer>
 
-    <!-- Script App Logic -->
-    <script>
-        // Riproduzione Video (Compatibile iPhone)
-        function playVideo(title, url) {
-            const container = document.getElementById('playerContainer');
-            const playerTitle = document.getElementById('playerTitle');
-            const videoPlayer = document.getElementById('mainVideoPlayer');
-            const videoSource = document.getElementById('videoSource');
-
-            playerTitle.innerHTML = `<i class="fa-solid fa-circle-play text-[#d87093]"></i> ${title}`;
-            videoSource.src = url;
-            videoPlayer.load();
-            container.classList.remove('hidden');
-            
-            // Scroll fino al player per un'esperienza ottimale
-            container.scrollIntoView({ behavior: 'smooth' });
-            
-            // Avvio riproduzione
-            videoPlayer.play().catch(err => console.log('Autoplay bloccato da browser:', err));
-        }
-
-        // Chiudi Player
-        function closePlayer() {
-            const container = document.getElementById('playerContainer');
-            const videoPlayer = document.getElementById('mainVideoPlayer');
-            videoPlayer.pause();
-            container.classList.add('hidden');
-        }
-
-        // Aggiungi un nuovo film alla pagina
-        function handleAddMovie(e) {
-            e.preventDefault();
-            const title = document.getElementById('movieTitleInput').value;
-            const duration = document.getElementById('movieDurationInput').value;
-            const size = document.getElementById('movieSizeInput').value;
-            const url = document.getElementById('movieUrlInput').value;
-
-            const grid = document.getElementById('movieGrid');
-            const card = document.createElement('div');
-            card.className = "movie-card bg-[#121216] border border-[#22222a] hover:border-[#d87093]/40 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col justify-between";
-            
-            card.innerHTML = `
-                <div class="relative h-48 bg-slate-900 flex items-center justify-center group">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-transparent z-10"></div>
-                    <i class="fa-solid fa-film text-6xl text-slate-800 group-hover:text-[#d87093]/40 transition duration-300"></i>
-                    <span class="absolute top-3 right-3 z-20 bg-[#0a0a0c]/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] font-bold text-[#d87093] border border-[#22222a]">HD</span>
-                    <span class="absolute bottom-3 left-3 z-20 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded text-xs text-slate-300"><i class="fa-regular fa-clock mr-1"></i> ${duration}</span>
-                </div>
-                <div class="p-5 space-y-4 flex-grow flex flex-col justify-between">
-                    <div>
-                        <h4 class="font-bold text-white text-base movie-title">${title}</h4>
-                        <p class="text-xs text-slate-400 mt-1">Film aggiunto di recente.</p>
-                    </div>
-                    <div class="space-y-3 pt-3 border-t border-[#22222a]">
-                        <div class="flex items-center justify-between text-xs text-slate-400">
-                            <span>Dimensione: <strong class="text-slate-200">${size}</strong></span>
-                            <span>Formato: <strong class="text-slate-200">MP4</strong></span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="playVideo('${title}', '${url}')" class="bg-[#d87093]/15 hover:bg-[#d87093] text-[#d87093] hover:text-white font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-[#d87093]/30">
-                                <i class="fa-solid fa-play"></i> Guarda Ora
-                            </button>
-                            <a href="${url}" download="${title}.mp4" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-700">
-                                <i class="fa-solid fa-download text-[#d87093]"></i> Scarica
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            grid.prepend(card);
-            document.getElementById('addMovieForm').reset();
-        }
-
-        // Ricerca in tempo reale
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const query = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.movie-card');
-            cards.forEach(card => {
-                const title = card.querySelector('.movie-title').textContent.toLowerCase();
-                if (title.includes(query)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
