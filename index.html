@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYNTAX SANTOS - Web Movies</title>
+    <title>Syntax Santos - Web Movies</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -52,6 +52,10 @@
             font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -1px;
+            background: rgba(216, 112, 147, 0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-color);
         }
 
         .brand-text h1 {
@@ -128,14 +132,14 @@
 
         .movie-thumbnail {
             width: 100%;
-            height: 180px;
-            background-color: #282828;
+            height: 160px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
+            color: var(--accent-color);
             font-size: 3rem;
-            position: relative;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .movie-info {
@@ -149,6 +153,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
         .movie-meta {
@@ -218,33 +223,20 @@
         </div>
 
         <div class="drive-banner">
-            📁 <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank">Apri Cartella Drive Completa</a>
+            📁 <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank">Apri Archivio su Google Drive</a>
         </div>
     </header>
 
     <main>
-        <h2 class="section-title">Film Disponibili</h2>
+        <h2 class="section-title">Catalogo Film</h2>
 
         <div class="movies-grid">
-            <!-- SCHEDA FILM 1 -->
+            <!-- Esempio Film collegato direttamente alla cartella o a file specifici -->
             <div class="movie-card">
                 <div class="movie-thumbnail">🎬</div>
                 <div class="movie-info">
-                    <h3 class="movie-title">Film 1 (Google Drive)</h3>
-                    <p class="movie-meta">MP4 • HD</p>
-                    <div class="actions">
-                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-primary">Guarda Ora</a>
-                        <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-secondary">Scarica</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SCHEDA FILM 2 (Per aggiungere altri film in futuro) -->
-            <div class="movie-card">
-                <div class="movie-thumbnail">🎬</div>
-                <div class="movie-info">
-                    <h3 class="movie-title">Film 2</h3>
-                    <p class="movie-meta">MP4 • HD</p>
+                    <h3 class="movie-title">Archivio Completo Film</h3>
+                    <p class="movie-meta">Google Drive • Streaming & Download</p>
                     <div class="actions">
                         <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-primary">Guarda Ora</a>
                         <a href="https://drive.google.com/drive/folders/1YdOmYon_WKP4ui1eIoAT-vtn5f82wdgl?usp=sharing" target="_blank" class="btn btn-secondary">Scarica</a>
